@@ -14,21 +14,15 @@ public class SceneSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("sceneName");
-        if (Input.GetKeyDown(KeyCode.V))
+        if(Input.GetKeyDown(KeyCode.V))
         {
-            switchToScene();
-        }
-        if(Input.anyKeyDown)
-        {
-            switchToScene();
+            switchToScene("VictoryScene");
             Debug.Log("°´¼ü: " + Input.inputString);
         }
     }
 
-    void switchToScene()
+    void switchToScene(string sceneName)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("sceneName");
+        SceneManager.LoadScene(sceneName);
     }
 }
