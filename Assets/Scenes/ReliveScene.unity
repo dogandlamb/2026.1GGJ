@@ -2199,10 +2199,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: anatawashinaremashita
+  m_text: "\u3042\u306A\u305F\u306F\u6B7B\u306A\u308C\u307E\u3057\u305F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbc934380da80be43b11e313692547e9, type: 2}
+  m_sharedMaterial: {fileID: 8076684139443196952, guid: fbc934380da80be43b11e313692547e9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
