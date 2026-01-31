@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b31b3543a00625478d384ab7945f660, type: 3}
+  m_Name: DialogueLinkSO
+  m_EditorClassIdentifier: 
+  name: "\u59D0\u59D0"
+  sprite: {fileID: 21300000, guid: 2a090ffc33383f64ca165fb4bc19bb71, type: 3}
+  dialogues:
+  - "\u5916\u9762\u7684\u6811\u53F6\u9EC4\u4E86"
+  - "\u6653\uFF0C\u8FD8\u8BB0\u5F97\u4E0A\u4E00\u6B21\u51FA\u95E8\u662F\u4EC0\u4E48\u65F6\u5019\u5417\uFF1F"
+  - "\u5E94\u8BE5\u662F\u53BB\u5E74\u4F60\u751F\u65E5\uFF1F"
+  nextDialogueNodes: {fileID: 11400000, guid: b59ef9411542df14d95410ecaeb78d7d, type: 2}
