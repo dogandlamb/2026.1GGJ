@@ -15,6 +15,13 @@ public class mainCharacter : MonoBehaviour
     const int maskNumber=10;
     // GameObject mainCharacter=GameObject.Find("mainCharacter");
     Rigidbody2D rb;
+    SpriteRenderer sr;
+    
+    //不同方向的移动贴图
+    public Sprite spriteUp;
+    public Sprite spriteDown;
+    public Sprite spriteLeft;
+    public Sprite spriteRight;
 
     int maskType;
     int currentMaskType;
@@ -34,6 +41,7 @@ public class mainCharacter : MonoBehaviour
         health=3;
         speed=2;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         maskType=0;
         currentMaskType=0;
 
@@ -53,18 +61,22 @@ public class mainCharacter : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             rb.velocity=new Vector3(0,speed,0);
+            if(spriteUp != null) sr.sprite = spriteUp;
         }
         else if (Input.GetKey(KeyCode.S))
         {
             rb.velocity=new Vector3(0,-speed,0);
+            if(spriteDown != null) sr.sprite = spriteDown;
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rb.velocity=new Vector3(speed,0,0);
+            if(spriteRight != null) sr.sprite = spriteRight;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             rb.velocity=new Vector3(-speed,0,0);
+            if(spriteLeft != null) sr.sprite = spriteLeft;
         }
         else
         {
