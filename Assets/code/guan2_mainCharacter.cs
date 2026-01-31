@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class guan2_mainCharacter : MonoBehaviour
 {
-    int health;
+    public int health; // 改为public以便UI访问
     public float speed;
     public float jumpForce;
     const int maskNumber=10;
@@ -26,7 +26,7 @@ public class guan2_mainCharacter : MonoBehaviour
 
     public int maskType;
     public int currentMaskType;
-    int[] maskAvailable=new int[maskNumber]{1,1,1,0,0,0,0,0,0,0};
+    public int[] maskAvailable=new int[maskNumber]{1,1,1,0,0,0,0,0,0,0}; // 改为public
     delegate void maskWear();
     delegate void maskAbility();
     maskWear[] maskWearArray=new maskWear[maskNumber];
@@ -49,9 +49,10 @@ public class guan2_mainCharacter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 1; // 启用重力
         sr = GetComponent<SpriteRenderer>();
-        maskType=0;
-        currentMaskType=0;
-
+        maskType=3; // 初始默认为3，以防从0开始
+        currentMaskType=3; // 初始默认为3
+        // 确保一开始就有3号面具(为了测试方便，或者你可以根据逻辑通过 getMask(3) 获得)
+        maskAvailable[3] = 1;
     }
 
     // Update is called once per frame
@@ -98,32 +99,44 @@ public class guan2_mainCharacter : MonoBehaviour
     
     void maskTransform()
     {
+        // 这一段是旧的左键确认逻辑，已删除
+        /*
         if (Input.GetMouseButtonDown(0))
         {
             currentMaskType=maskType;
             maskWearArray[maskType]?.Invoke();
         }
+        */
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            for(int i = 1; i <= maskNumber; i++)
+            // 限定只在 3, 4, 5, 6 之间循环
+            // 如果还没拿到对应的面具，就可能跳过
+            // 如果刚开始是0，按第一下Q应该变成3 (如果3已解锁)
+            
+            // 简单循环查找：从当前 maskType + 1 开始找，直到找到一个 maskAvailable==1 且 ID >= 3 且 ID <= 6 的
+            // 这只是针对这一关的特殊逻辑
+
+            int checkId = maskType;
+            for (int i = 0; i < maskNumber; i++) 
             {
-                if (i+maskType >= maskNumber)
+                checkId++; // 检查下一个
+                if (checkId > 6) checkId = 3; // 超过6回到3
+
+                // 如果 maskAvailable 数组里说我们有这个面具
+                if (maskAvailable[checkId] == 1)
                 {
-                    if (maskAvailable[i+maskType-10] == 1)
-                    {
-                        maskType=i+maskType-10;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (maskAvailable[i+maskType] == 1)
-                    {
-                        maskType=i+maskType;
-                        break;
-                    }
+                    maskType = checkId;
+                    break;
                 }
             }
+        }
+
+        // 实时更新 currentMaskType，使其始终等于选中的 maskType
+        if (currentMaskType != maskType)
+        {
+            currentMaskType = maskType;
+            maskWearArray[maskType]?.Invoke(); // 触发戴面具效果
         }
     }
     public void getMask(int maskType)
