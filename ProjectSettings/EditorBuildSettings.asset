@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Introduce.unity
     guid: 81ad295555d5f9646af892a56fafb3a7
+  - enabled: 1
+    path: Assets/Scenes/ReliveScene.unity
+    guid: e1cbcac84a7b0ef4d85a774993af4a3e
   m_configObjects: {}

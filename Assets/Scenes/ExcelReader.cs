@@ -1,4 +1,5 @@
 using ExcelDataReader;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ public class ExcelReader : MonoBehaviour
         public int choice1FileName;
         public string choice2content;
         public int choice2FileName;
+        public string choice1Action;
+        public string choice2Action;
     }
 
     public struct SceneData
@@ -48,6 +51,8 @@ public class ExcelReader : MonoBehaviour
                         data.choice2content = reader.IsDBNull(6) ? string.Empty : reader.GetValue(6).ToString();
                         //data.choice2FileName = reader.IsDBNull(7) ? -1 : reader.GetInt32(7);
                         data.choice2FileName = reader.IsDBNull(7) ? -1 : (int.TryParse(reader.GetValue(5)?.ToString(), out int val2) ? val2 : -1) - 1;
+                        data.choice1Action = reader.IsDBNull(8) ? string.Empty : reader.GetValue(8).ToString();
+                        data.choice2Action = reader.IsDBNull (9) ? string.Empty : reader.GetValue(9).ToString();
                         // 注意行数需要减一之后才是真实值
                         // 第0列作为标识
                         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
