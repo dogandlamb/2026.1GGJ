@@ -1,0 +1,23 @@
+1.导入unitypackage包后，点击上边栏的DialogueSystem > CreateDialogueSystem/CreateDialogueNPC,即可创建对话系统的UI层/NPC(ModuleAndController)层。
+2.将DialogueModule与DialogueTrigger脚本挂载在你需要对话的NPC身上。
+3.配置DialogueModule：
+	1)存在双人对话模式(2D与3D)和多人对话模式(建议2D文字游戏为主)。
+		(1)双人对话模式：选择“双人对话”，名字和插图在Inspector里面配置即可,并且SO最好是对话链-选项链。
+		(2)多人对话模式：选择“多人对话”，在SO里面配置即可,并且SO最好是对话链-对话链-...-对话链-选项链。
+	2)必须添加头对话节点，否则会报错。
+	3)跳过整个对话和推进对话的输入设备可以在Inspector中的对话按键中调整即可。
+3.配置文本SO，右击Create > Dialogue创建选项节点和对话链节点。
+4.如若需要对话开始禁用行动之类的操作，可以在Inspector窗口的对话/结束对话Event中添加相应回调函数。
+
+1.After importing the unitypackage, click DialogueSystem > Create Dialogue System in the top menu bar to create the UI layer for the dialogue system.
+2.Attach the DialogueModule script to any NPC with which you want to implement dialogue.
+3.Configure the DialogueModule:
+    1)Dialogue Modes: Two dialogue modes are available: Two-Player Mode (supports both 2D and 3D) and Multi-Player Mode (recommended primarily for 2D text-based games).
+        (1)Two-Player Mode: Select "Two-Player" from the dropdown. Configure the character names and portraits directly in the Inspector.
+        (2)Multi-Player Mode: Select "Multi-Player" from the dropdown. Configure all dialogue data within the ScriptableObject (SO) assets.
+    2)Critical Requirement: A Head Dialogue Node must be assigned; otherwise, an error will occur.
+    3)Input Configuration: The input keys for skipping the entire dialogue and advancing text can be customized in the Inspector under the 'Dialogue Keys' section.
+4.Configure Text ScriptableObjects (SOs): Right-click in the Project window and select Create > Dialogue to create new Option Nodes and Dialogue Link Nodes.
+5.Gameplay Integration: To trigger actions like disabling player movement when dialogue starts, add your custom logic to the On Dialogue Start or On Dialogue End event callbacks in the Inspector.
+
+*本小插件创作者：海海不瞌睡
