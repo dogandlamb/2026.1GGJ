@@ -13,5 +13,12 @@ public class StartCode : MonoBehaviour
     {
         Application.Quit();
     }
-
+    public void GameCredit()
+    {
+        SceneManager.LoadScene("Introduce");
+    }
+    public void GameCredit2Start()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }

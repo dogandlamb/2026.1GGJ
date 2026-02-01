@@ -7,6 +7,8 @@ public class guan2_chuansongmen : MonoBehaviour
     [Header("设置")]
     public Transform targetPosition; // 拖入你要传送到的目标位置（可以是另一个空的 GameObject）
     public Canvas hintCanvas; // 提示UI
+    public AudioClip textTeleportSound; // 传送音效
+    private AudioSource audioSource;
 
     private bool canTeleport = false;
     private Transform playerTransform;
@@ -14,6 +16,8 @@ public class guan2_chuansongmen : MonoBehaviour
     void Start()
     {
         if (hintCanvas != null) hintCanvas.enabled = false;
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -22,9 +26,16 @@ public class guan2_chuansongmen : MonoBehaviour
         {
             if (targetPosition != null && playerTransform != null)
             {
+                // 播放音效
+                if (textTeleportSound != null && audioSource != null)
+                {
+                    audioSource.PlayOneShot(textTeleportSound);
+                }
+
                 playerTransform.position = targetPosition.position;
                 Debug.Log("已传送玩家到: " + targetPosition.position);
                 
+                // 暂时禁止再次传送一小段时间，或者直接关闭提示
                 // 传送后关闭提示（因为玩家已经离开了区域）
                 if (hintCanvas != null) hintCanvas.enabled = false;
             }

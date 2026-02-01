@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.SceneManagement; // 引入 SceneManagement
 
 
 
@@ -24,7 +24,22 @@ public class guan2_mainCharacter : MonoBehaviour
     public Sprite spriteLeft;
     public Sprite spriteRight;
 
+    [Header("不同面具的下蹲(按S)贴图")]
+    public Sprite spriteDownNoMask; // 无面具/默认
+    public Sprite spriteDownMask3;  // 面具3
+    public Sprite spriteDownMask4;  // 面具4
+    public Sprite spriteDownMask5;  // 面具5
+    public Sprite spriteDownMask6;  // 面具6
+
+    [Header("音效")]
+    public AudioSource audioSource;
+    public AudioClip sfxMove;       // 移动/走路
+    public AudioClip sfxJump;       // 跳跃
+    public AudioClip sfxMaskChange; // 切换面具
+    public AudioClip sfxDamage;     // 受伤
+
     public int maskType;
+
     public int currentMaskType;
     public int[] maskAvailable=new int[maskNumber]{1,1,1,0,0,0,0,0,0,0}; // 改为public
     delegate void maskWear();
@@ -49,10 +64,15 @@ public class guan2_mainCharacter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 1; // 启用重力
         sr = GetComponent<SpriteRenderer>();
-        maskType=3; // 初始默认为3，以防从0开始
-        currentMaskType=3; // 初始默认为3
-        // 确保一开始就有3号面具(为了测试方便，或者你可以根据逻辑通过 getMask(3) 获得)
-        maskAvailable[3] = 1;
+        // 获取 AudioSource，如果没有则尝试获取物体上的
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+
+        maskType = 0; // 初始设为0（默认无特殊面具），避免一开始就变成3
+        currentMaskType = 0; 
+        
+        // 注意：除了 maskAvailable[0,1,2] 可能作为基础面具外，其他都应该为 0
+        // 代码开头定义的 int[] maskAvailable=new int[maskNumber]{1,1,1,0...} 已经默认了3号是0
+        // 之前我加了一行 maskAvailable[3] = 1，现在删掉它
     }
 
     // Update is called once per frame
@@ -60,24 +80,51 @@ public class guan2_mainCharacter : MonoBehaviour
     {
         move();
         maskTransform();
-        maskAbiliyArray[currentMaskType]?.Invoke();
+        if (currentMaskType >= 0 && currentMaskType < maskNumber)
+        {
+            maskAbiliyArray[currentMaskType]?.Invoke();
+        }
         Debug.Log(currentMaskType);
     }
 
     void move()
     {
         float moveX = 0;
+        bool isMoving = false;
+
         if (Input.GetKey(KeyCode.D))
         {
             moveX = speed;
+            isMoving = true;
             if(spriteRight != null) sr.sprite = spriteRight;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             moveX = -speed;
+            isMoving = true;
             if(spriteLeft != null) sr.sprite = spriteLeft;
         }
         
+        // 处理移动音效 (循环播放)
+        if (isMoving && Mathf.Abs(rb.velocity.y) < 0.1f) // 在地面上移动才响
+        {
+            if (audioSource != null && sfxMove != null && (!audioSource.isPlaying || audioSource.clip != sfxMove))
+            {
+                audioSource.clip = sfxMove;
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            // 如果停止移动或者在这个AudioSource上播放的是移动音效，则停止
+            if (audioSource != null && audioSource.isPlaying && audioSource.clip == sfxMove)
+            {
+                audioSource.Stop();
+                audioSource.clip = null; 
+            }
+        }
+
         // 应用水平速度，保留垂直速度（重力/跳跃）
         rb.velocity = new Vector2(moveX, rb.velocity.y);
 
@@ -87,12 +134,24 @@ public class guan2_mainCharacter : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if(spriteUp != null) sr.sprite = spriteUp;
+            
+            // 播放跳跃音效
+            if (audioSource != null && sfxJump != null) 
+                audioSource.PlayOneShot(sfxJump);
         }
 
         // 下键可用于下蹲或切换图片
         if (Input.GetKey(KeyCode.S))
         {
-            if(spriteDown != null) sr.sprite = spriteDown;
+            Sprite targetDown = spriteDownNoMask; // 默认使用无面具图
+            
+            if (currentMaskType == 3) targetDown = spriteDownMask3;
+            else if (currentMaskType == 4) targetDown = spriteDownMask4;
+            else if (currentMaskType == 5) targetDown = spriteDownMask5;
+            else if (currentMaskType == 6) targetDown = spriteDownMask6;
+
+            if (targetDown != null) sr.sprite = targetDown;
+            else if(spriteDown != null) sr.sprite = spriteDown;
         }            
     }
 
@@ -137,6 +196,10 @@ public class guan2_mainCharacter : MonoBehaviour
         {
             currentMaskType = maskType;
             maskWearArray[maskType]?.Invoke(); // 触发戴面具效果
+            
+            // 播放切换面具音效
+            if (audioSource != null && sfxMaskChange != null)
+                audioSource.PlayOneShot(sfxMaskChange);
         }
     }
     public void getMask(int maskType)
@@ -158,12 +221,18 @@ public class guan2_mainCharacter : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        
+        // 播放受伤音效
+        if (audioSource != null && sfxDamage != null)
+            audioSource.PlayOneShot(sfxDamage);
+
         Debug.Log("受到伤害！当前生命值: " + health);
         if (health <= 0)
         {
             health = 0;
             Debug.Log("游戏结束 (Player Died)");
-            // 这里可以添加重新加载场景或死亡动画的逻辑
+            // 跳转到复活场景
+            SceneManager.LoadScene("ReliveScene"); 
         }
     }
 

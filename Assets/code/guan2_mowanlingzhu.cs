@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // 必须引用UI库用于Slider
+using UnityEngine.Video; // 引用VideoPlayer
 
 public class guan2_mowanlingzhu : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class guan2_mowanlingzhu : MonoBehaviour
     public int mowanMaskID = 6; // 魔丸灵珠面具的ID
 
     [Header("鼎设置")]
+    public VideoPlayer breakVideo; // 破鼎时的视频播放器
     public Transform cauldronCenter; // 鼎的中心位置（把玩家吸过去）
     public GameObject effectCooking; // “被煮”特效
     public GameObject effectExplosion; // “爆开”特效
@@ -32,6 +34,12 @@ public class guan2_mowanlingzhu : MonoBehaviour
         if (gameCanvas != null) gameCanvas.enabled = false;
         if (escapePanel != null) escapePanel.SetActive(false);
         if (effectCooking != null) effectCooking.SetActive(false);
+        // 初始化时不播放视频，并隐藏它（如果它是独立的游戏物体）
+        if (breakVideo != null) 
+        {
+            breakVideo.Stop();
+            breakVideo.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -106,6 +114,13 @@ public class guan2_mowanlingzhu : MonoBehaviour
         {
             Instantiate(effectExplosion, transform.position, Quaternion.identity);
             // 或者 effectExplosion.SetActive(true);
+        }
+
+        // 播放破鼎视频
+        if (breakVideo != null)
+        {
+            breakVideo.gameObject.SetActive(true);
+            breakVideo.Play();
         }
 
         // 获得面具

@@ -4,7 +4,6 @@ using System.Data;
 // using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -15,7 +14,6 @@ public class mainCharacter : MonoBehaviour
     int health;
     float speed;
     const int maskNumber=10;
-    int sightClear;
     Rigidbody2D rb;
     SpriteRenderer sr;
 
@@ -50,7 +48,7 @@ public class mainCharacter : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         maskType=0;
         currentMaskType=0;
-        sightClear=1;
+        // sightClear=1;
         maskinit();
 
     }

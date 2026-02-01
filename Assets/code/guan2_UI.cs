@@ -10,15 +10,17 @@ public class guan2_UI : MonoBehaviour
     public guan2_mainCharacter player;
 
     [Header("生命值设置")]
-    public Image[] hearts; // 拖入3个心形Image
-    public Sprite heartFull; // 满血图片
-    public Sprite heartEmpty; // 空血图片
+    public TMP_Text healthText; // 用于显示 "X3" 的文本
 
     [Header("面具栏设置")]
     // 该关卡主要涉及的4个面具ID：3(秦始皇), 4(不鸟你), 5(小黑子), 6(魔丸)
     public int[] displayMaskIDs = new int[] { 3, 4, 5, 6 };
     public MaskSlotUI[] maskSlots; // 对应UI上的4个格子
-    
+
+    [Header("声音设置")]
+    public AudioSource audioSource;
+    public AudioClip sfxButtonClick;
+
     [Header("指针设置")]
     public RectTransform pointer; // 指针图片
     public float pointerYOffset = 50f; // 指针在面具上方的偏移量
@@ -34,6 +36,8 @@ public class guan2_UI : MonoBehaviour
 
     void Start()
     {
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+
         // 初始化获取每个槽位的 RectTransform，方便移动指针
         for (int i = 0; i < maskSlots.Length; i++)
         {
@@ -41,6 +45,15 @@ public class guan2_UI : MonoBehaviour
             {
                 maskSlots[i].rectTransform = maskSlots[i].iconImage.GetComponent<RectTransform>();
             }
+        }
+    }
+
+    // 供UI按钮绑定的公共方法
+    public void PlayClickSound()
+    {
+        if (audioSource != null && sfxButtonClick != null)
+        {
+            audioSource.PlayOneShot(sfxButtonClick);
         }
     }
 
@@ -55,34 +68,9 @@ public class guan2_UI : MonoBehaviour
 
     void UpdateHealth()
     {
-        if (hearts == null) return;
-
-        for (int i = 0; i < hearts.Length; i++)
+        if (healthText != null)
         {
-            if (hearts[i] == null) continue;
-
-            if (i < player.health)
-            {
-                // 有血
-                if (heartFull != null) hearts[i].sprite = heartFull;
-                hearts[i].color = Color.white;
-                hearts[i].gameObject.SetActive(true); // 确保显示
-            }
-            else
-            {
-                // 没血
-                if (heartEmpty != null) 
-                {
-                    hearts[i].sprite = heartEmpty;
-                    hearts[i].color = Color.white; // 有空心图就显示原色
-                }
-                else 
-                {
-                    // 如果没有空血图，可以变黑或者隐藏，这里改为变透明黑色
-                    hearts[i].color = new Color(0, 0, 0, 0.5f); 
-                }
-                hearts[i].gameObject.SetActive(true);
-            }
+            healthText.text = "X" + player.health.ToString();
         }
     }
 
@@ -115,7 +103,6 @@ public class guan2_UI : MonoBehaviour
         if (pointer == null) return;
 
         int targetSlotIndex = 0; // 默认指向第0个插槽（即ID为3的面具）
-        bool matchFound = false;
 
         for (int i = 0; i < displayMaskIDs.Length; i++)
         {
@@ -123,7 +110,6 @@ public class guan2_UI : MonoBehaviour
             if (player.maskType == displayMaskIDs[i])
             {
                 targetSlotIndex = i;
-                matchFound = true;
                 break;
             }
         }

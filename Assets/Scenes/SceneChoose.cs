@@ -19,4 +19,9 @@ public class SceneChoose : MonoBehaviour
     {
         SceneManager.LoadScene("InnerScene3");
     }
+
+    public void ChangeToStart()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }

@@ -17,7 +17,7 @@ public class DialogueView : Singleton<DialogueView>
     [HideInInspector] public Image dialogBox;
     private Image headBox;
     private TMP_Text dialogueText;
-    private TMP_Text name;
+    private new TMP_Text name;
     
     [HideInInspector] public bool isSkip;
     [HideInInspector] public bool allowSkipping;

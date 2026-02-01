@@ -15,7 +15,10 @@ public class OptionsPool : MonoBehaviour
     
     private void Awake()
     {
-        optionPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/DialogueSystem/Prefabs/Option.prefab", typeof(GameObject));
+#if UNITY_EDITOR
+        if (optionPrefab == null)
+            optionPrefab = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/DialogueSystem/Prefabs/Option.prefab", typeof(GameObject));
+#endif
         
         //初始化对象池
         pool = new ObjectPool<GameObject>(
