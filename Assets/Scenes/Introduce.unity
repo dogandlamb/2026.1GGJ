@@ -1429,6 +1429,7 @@ GameObject:
   - component: {fileID: 1056663998}
   - component: {fileID: 1056663997}
   - component: {fileID: 1056663996}
+  - component: {fileID: 1056663999}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1510,6 +1511,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1056663999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056663995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1118002942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,7 +1989,7 @@ MonoBehaviour:
     roleImage: {fileID: 21300000, guid: c7359bb6ba45715448e4de5a50497e0f, type: 3}
     message: "\u9752 \u5C71 \u521A \u660C \u51AF \u865A \u5FA1 \u98CE\n\uFF08dogandlamb:guess
       what's happening to a cartoon near 2026.1?(*\xB4\u0437\uFF40*)\uFF09"
-    messageImage: {fileID: 21300000, guid: 21337bd7467d5f34e8f7bfa1c3a89912, type: 3}
+    messageImage: {fileID: 21300000, guid: ce5832e4ebc7c6d48861b70fb1d27922, type: 3}
     fontForText: {fileID: 0}
     roleBoxBackground: {fileID: 0}
     messageBoxBackground: {fileID: 0}
@@ -1955,16 +2000,16 @@ MonoBehaviour:
     roleImage: {fileID: 21300000, guid: c5c58b80c854a21409b8324c9c810db9, type: 3}
     message: "\u201C\u73A9\u6E38\u620F\u5F53\u7136\u662F\u8981\u7B11\u7740\u73A9\u5566\uFF01\u201D\r\n\uFF08\u556A\u5527\u4E00\u4E0B\u88ABboss\u79D2\u4E86\uFF09\r\n\uFF08\u6253\u4E86\u4E24\u4E2A\u534A\u5C0F\u65F6\u7EA2\u6E29\u5230\u9752\u7B4B\u66B4\u8D77\uFF09\r\n\u201C\u554A\u54C8\u4F60\u5E72\u561B~\u54CE\u5466~\u201D\r\nPs\uFF1A\u6635\u79F0\u662F\u95FD\u5357\u8BDD\u5566Ciallo(\u2220\u30FB\u03C9<
       )\u2312\u2606\r\n(dogandlamb:\u5927\u9EC4\u8702\u4E0D\u597D\uFF1F)"
-    messageImage: {fileID: 21300000, guid: 09af95d08f46a384f8a8a1e5d250dcb7, type: 3}
+    messageImage: {fileID: 21300000, guid: cfccc05c79e568a47acce33bdf92219c, type: 3}
     fontForText: {fileID: 0}
     roleBoxBackground: {fileID: 0}
     messageBoxBackground: {fileID: 0}
   - name: "\u5730\u7403\u4EEA"
     nameImage: {fileID: 21300000, guid: f66afea64eedd7547a061f9eec55977b, type: 3}
     portrait: {fileID: 21300000, guid: fb104f68c21d75c4fb780a1ce919e4cd, type: 3}
-    roles: "\u4E0E\u53EF\u7231\u7684whalelllll\u4E3A\u6574\u4E2A\u6E38\u620F\u5960\u5B9A\u7684\u7F8E\u672F\u57FA\u8C03\u3002
+    roles: "\u4E0E\u5341\u5206\u53EF\u7231^-^\u7684whalelllll\u4E3A\u6574\u4E2A\u6E38\u620F\u5960\u5B9A\u7684\u7F8E\u672F\u57FA\u8C03\u3002
       \u201C\u753B\u8239\u82B1\u822B\u603B\u65B0\u5986\uFF0C\u8FDB\u5165\u6C60\u5FC3\u8FD1\u5C9B\u508D\u201D"
-    roleImage: {fileID: 21300000, guid: 64b5532a69f5d2b47b3516b722f2890d, type: 3}
+    roleImage: {fileID: 21300000, guid: 4fc4732059bca5c4ab7115ad86bb50b1, type: 3}
     message: "\u628A\u5976\u9F99\u753B\u7684\u8FD9\u4E48\u53EF\u7231\u771F\u662F\u62B1\u6B49;)\ndogandlamb:\u4E0D\u53EF\u7231\u7684\u8BDD\u6211\u5C31\u505A\u6050\u6016\u6E38\u620F\u4E86(\uFF9F\u03C9\xB4)"
     messageImage: {fileID: 21300000, guid: 836eef4a3cadb6a40ba37a83353682bc, type: 3}
     fontForText: {fileID: 0}
@@ -1972,22 +2017,22 @@ MonoBehaviour:
     messageBoxBackground: {fileID: 0}
   - name: "\u6770\u5821"
     nameImage: {fileID: 21300000, guid: 689212f01ec78264fb6905747b2d6f23, type: 3}
-    portrait: {fileID: 0}
+    portrait: {fileID: 21300000, guid: 0b65d02b1bcbbbe47bc057c38b88b916, type: 3}
     roles: "\u8D1F\u8D23\u7B2C\u4E09\u5173\u7684\u7A0B\u5E8F\u4EE3\u7801\uFF0C\u6587\u5B57\u6E38\u620F\u201D\u6770\u201C\u51FA\u5927\u5E08"
     roleImage: {fileID: 21300000, guid: eaecb0cb600524b458ad455d46dc6162, type: 3}
     message: 
-    messageImage: {fileID: 0}
+    messageImage: {fileID: 21300000, guid: 2bdaec03590c5bd4fa2a9e3cc0a680f3, type: 3}
     fontForText: {fileID: 0}
     roleBoxBackground: {fileID: 0}
     messageBoxBackground: {fileID: 0}
   - name: Yuu
     nameImage: {fileID: 0}
-    portrait: {fileID: 0}
-    roles: "\u7B2C\u4E00\u5173\u7684\u7A0B\u5E8F\uFF0C\u4E0D\u8FC7\u5728\u6253\u6D6A\u6F2B\u624B\u673A(-V-)\u3002Have
+    portrait: {fileID: 21300000, guid: 7b82cd1ac0bc24b4fad6429c7a9a7dd1, type: 3}
+    roles: "\u7B2C\u4E00\u5173\u7684\u7A0B\u5E8F\uFF0C\u4E0D\u8FC7\u5728\u6253\u6D6A\u6F2B\u624B\u673A(-V-)\u3002\u867D\u7136\u7B2C\u4E00\u5173\u6CA1\u505A\u51FA\u6765\uFF0C\u4F46GGJ\u8FD9\u6BB5\u65C5\u7A0B\u8DB3\u591F\u7CBE\u5F69\u5C31\u597D\u5566\uFF0CHave
       fun~"
-    roleImage: {fileID: 21300000, guid: d5bd2b46fff358941b987b101ae91126, type: 3}
-    message: 
-    messageImage: {fileID: 0}
+    roleImage: {fileID: 21300000, guid: 9e2ea7202b3491f478003cb7f0235435, type: 3}
+    message: "\u6CA1\u6709\u505A\u5B8C\u771F\u662F\u62B1\u6B49\n\uFF08dogandlamb\uFF1A\u4E00\u56DE\u751F\uFF0C\u4E8C\u56DE\u719F\uFF0C\u4E0B\u6B21\u89C1\u9762\u4F1A\u66F4\u597D\uFF01^-^\uFF09"
+    messageImage: {fileID: 21300000, guid: 05a2988442113f944baa593bc7d1a7a2, type: 3}
     fontForText: {fileID: 0}
     roleBoxBackground: {fileID: 0}
     messageBoxBackground: {fileID: 0}
